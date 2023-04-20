@@ -1,0 +1,13 @@
+version: "3.9"
+services:
+  web:
+    build: .
+    volumes:
+      - ./:/app
+    environment:
+      - REDIS_SERVER_URL=redis://redis:6379
+    ports: 
+      - "8000:3000"
+  redis:
+    container_name: redis
+    image: "redis:alpine"
