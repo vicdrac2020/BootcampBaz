@@ -32,5 +32,11 @@ const validadorQueryParams = queryParams => {
     if(queryParams?.query){
         params.query = queryParams.query;
     }
+    if(queryParams?.year){
+        params.year = queryParams.year;
+    }
+    if(queryParams?.genero){
+        params.with_genres = queryParams.genero;
+    }
     return params;
 };

@@ -16,7 +16,7 @@ export class PeliculasServiceService {
     return this.http.get<ListaPeliculas>(this.ChuckUrl);
   }
 
-  public getSearchPeliculas(nombrePelicula:String): Observable<ListaPeliculas> {
-    return this.http.get<ListaPeliculas>(this.searchUrl,{params:{'query':`${nombrePelicula}`}});
+  public getSearchPeliculas(nombrePelicula:String, yearPelicula:String): Observable<ListaPeliculas> {
+    return this.http.get<ListaPeliculas>(this.searchUrl,{params:{'query':`${nombrePelicula}`, 'year':`${yearPelicula}`}});
   }
 }
