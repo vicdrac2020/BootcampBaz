@@ -9,7 +9,12 @@ import { errorHandler } from '../middleware/errorHandler.js';
 // Server
 const server = express();
 // Middlewares
-server.use(cors());
+server.use(cors({
+  origin: 'http://localhost:4200',
+  credentials: true,
+  methods: ['GET', 'POST', 'OPTIONS', 'PUT', 'PATCH', 'DELETE'],
+  allowedHeaders: ['X-Requested-With', 'content-type', 'Accept', 'Authorization'],
+}));
 server.use(express.json());
 server.use(
   express.urlencoded({

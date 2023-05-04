@@ -9,6 +9,15 @@ export const getDiscoverPeliculas = async (queryParams) => {
         })
     return response;
 };
+export const getSearchPeliculas = async (queryParams) => {
+    const response = await axios.get(`http://${serverApiRest.urlServicios}/search/movie`, { params: validadorQueryParams(queryParams) })
+        .then(response => {
+            return response.data;
+        }).catch(error => {
+            console.error(error);
+        })
+    return response;
+}
 const validadorQueryParams = queryParams => {
     const params = {
         api_key: serverApiRest.apy_key,
@@ -20,5 +29,8 @@ const validadorQueryParams = queryParams => {
     if (queryParams?.ordenamiento) {
         params.sort_by = queryParams.ordenamiento;   
     }
+    if(queryParams?.query){
+        params.query = queryParams.query;
+    }
     return params;
-}
+};

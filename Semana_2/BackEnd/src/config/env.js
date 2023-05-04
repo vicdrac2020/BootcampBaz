@@ -6,5 +6,6 @@ export const db = {};
 export const serverApiRest = {
     urlServicios: process.env.urlServicios,
     urlImagenes: process.env.urlImagenes,
-    apy_key: process.env.apiKey
+    apy_key: process.env.apiKey,
+    port: process.env.port,
 };

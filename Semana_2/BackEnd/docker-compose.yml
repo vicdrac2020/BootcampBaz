@@ -1,0 +1,13 @@
+version: "3.9"
+services:
+  web:
+    build: .
+    volumes:
+      - ./:/app
+    environment:
+      - urlServicios=api.themoviedb.org/3
+      - urlImagenes=image.tmdb.org/t/p/w500
+      - apiKey=af9f7b2e3a5a1b16abd19a80f42fc10b
+      - port=3000
+    ports: 
+      - "3000:3000"
