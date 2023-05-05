@@ -9,6 +9,7 @@ import { BarraTituloComponent } from './componentes/barra-titulo/barra-titulo.co
 import {MatSelectModule} from '@angular/material/select';
 import { HttpClientModule } from "@angular/common/http";
 import { BuscadorComponent } from './componentes/buscador/buscador.component';
+
 @NgModule({
   declarations: [
     AppComponent,

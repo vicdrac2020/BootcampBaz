@@ -18,6 +18,15 @@ export const getSearchPeliculas = async (queryParams) => {
         })
     return response;
 }
+export const getGenerosPeliculas = async (queryParams) => {
+    const response = await axios.get(`http://${serverApiRest.urlServicios}/genre/movie/list`, { params: validadorQueryParams(queryParams) })
+        .then(response => {
+            return response.data;
+        }).catch(error => {
+            console.error(error);
+        })
+    return response;
+}
 const validadorQueryParams = queryParams => {
     const params = {
         api_key: serverApiRest.apy_key,
@@ -26,17 +35,17 @@ const validadorQueryParams = queryParams => {
     if (queryParams?.pagina) {
       params.page = queryParams.pagina;
     }
-    if (queryParams?.ordenamiento) {
-        params.sort_by = queryParams.ordenamiento;   
+    if (queryParams?.ordenamientoPelicula) {
+        params.sort_by = queryParams.ordenamientoPelicula;   
     }
-    if(queryParams?.query){
-        params.query = queryParams.query;
+    if(queryParams?.searchPelicula){
+        params.query = queryParams.searchPelicula;
     }
-    if(queryParams?.year){
-        params.year = queryParams.year;
+    if(queryParams?.yearPelicula){
+        params.year = queryParams.yearPelicula;
     }
-    if(queryParams?.genero){
-        params.with_genres = queryParams.genero;
+    if(queryParams?.generoPelicula){
+        params.with_genres = queryParams.generoPelicula;
     }
     return params;
 };

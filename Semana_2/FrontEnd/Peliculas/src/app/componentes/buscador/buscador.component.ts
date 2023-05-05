@@ -13,6 +13,7 @@ export class BuscadorComponent implements OnInit{
   
   public years: string[] = ['Cualquier Año'];
   public default: string = 'Cualquier Año';
+  
   searchForm = this.formBuilder.group({
     searchPelicula: ['',[Validators.required]],
     yearPelicula: ['',[Validators.required]]
@@ -31,7 +32,6 @@ export class BuscadorComponent implements OnInit{
     if(cred.yearPelicula as String === this.default){
       cred.yearPelicula = '';
     }
-    console.log(cred.yearPelicula as String);
-    this.peliculasServiceService.getSearchPeliculas(cred.searchPelicula as String,cred.yearPelicula as String).subscribe(response => this.listaPeliculas = response)
+    this.peliculasServiceService.getSearchPeliculas(cred).subscribe(response => this.listaPeliculas = response)
   }
 }

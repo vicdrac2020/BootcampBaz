@@ -1,11 +1,36 @@
 <div class="container mx-auto bg-zinc-800">
-    <div class="mx-auto max-w-2xl px-2 py-8 sm:px-3 sm:py-12 lg:max-w-7xl lg:px-4"></div>
+    <div class="mx-auto max-w-2xl px-2 py-8 sm:px-3 sm:py-12 lg:max-w-7xl lg:px-4">
+        <div >
+            <form [formGroup]="searchForm" (ngSubmit)="onSubmit()" class="mt-0 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-3 lg:grid-cols-3 xl:gap-x-8">
+                <select formControlName="yearPelicula" matNativeControl required class="flex-shrink-0 z-10 inline-flex items-center py-2.5 px-6 text-sm font-medium text-center text-gray-900 bg-gray-100 border border-gray-300 rounded-lg hover:bg-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:focus:ring-gray-700 dark:text-white dark:border-gray-600">
+                    <option *ngFor="let y of years" value="{{y}}">{{y}}</option>
+                </select>
+                <select formControlName="generoPelicula" matNativeControl required class="flex-shrink-0 z-10 inline-flex items-center py-2.5 px-6 text-sm font-medium text-center text-gray-900 bg-gray-100 border border-gray-300 rounded-lg hover:bg-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:focus:ring-gray-700 dark:text-white dark:border-gray-600">
+                    <option *ngFor="let genero of listaGeneros.genres" value="{{genero.id}}">{{genero.name}}</option>
+                </select>
+                <select formControlName="ordenamientoPelicula" matNativeControl required class="flex-shrink-0 z-10 inline-flex items-center py-2.5 px-6 text-sm font-medium text-center text-gray-900 bg-gray-100 border border-gray-300 rounded-lg hover:bg-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:focus:ring-gray-700 dark:text-white dark:border-gray-600">
+                    <option *ngFor="let order of ordenamientoPelicula" value="{{order.idSort}}">{{order.nameSort}}</option>
+                </select>
+                <button type="submit" class="p-2.5 text-sm font-medium text-white bg-red-700 rounded-lg border border-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800">
+                    <p>Filtrar peliculas</p>
+                    <span class="sr-only">Filtrar</span>
+                </button>
+            </form>
+        </div>    
+    </div>
     <div class="mt-0 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:gap-x-8">
         <div *ngFor="let pelicula of listaPeliculas.results" class="bg-zinc-800 mx-8 px-2 grid place-items-center">
             <div
                 class="min-h-80 aspect-h-1 aspect-w-1 w-64 overflow-hidden rounded-md bg-zinc-800 lg:aspect-none group-hover:opacity-75 lg:h-80">
-                <img src="https://image.tmdb.org/t/p/w500{{pelicula.poster_path}}"
-                    class="h-full w-52 object-cover lg:h-full lg:w-52 mx-auto shadow-md">
+                <div *ngIf="pelicula.poster_path !== null; then thenBlock else elseBlock"></div>
+                <ng-template #elseBlock>
+                    <img src="https://motivatevalmorgan.com/wp-content/uploads/2016/06/default-movie-476x700.jpg"
+                                    class="h-full w-52 object-cover lg:h-full lg:w-52 mx-auto shadow-md">    
+                </ng-template>
+                <ng-template #thenBlock>
+                    <img src="https://image.tmdb.org/t/p/w500{{pelicula.poster_path}}"
+                                    class="h-full w-52 object-cover lg:h-full lg:w-52 mx-auto shadow-md">
+                </ng-template>                
             </div>
             <div class="mt-4 flex justify-between">
                 <div class="">

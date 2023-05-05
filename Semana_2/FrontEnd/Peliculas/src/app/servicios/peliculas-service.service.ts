@@ -2,21 +2,27 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { ListaPeliculas } from '../modelos/lista-peliculas';
 import { Observable } from "rxjs";
+import { ListaGeneros } from '../modelos/lista-generos';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PeliculasServiceService {
-  private listaPeliculas: ListaPeliculas = {page:1,results:[],total_pages:1,total_results:1};
-  private ChuckUrl = "http://localhost:3000/galeria/peliculas"; // URL to web api
+  
+  private DiscoverUrl = "http://localhost:3000/galeria/peliculas"; // URL to web api
   private searchUrl = "http://localhost:3000/galeria/peliculas/search"; // URL to web api
+  private generosUrl = "http://localhost:3000/galeria/peliculas/generos"; // URL to web api
   constructor(private http: HttpClient) {}
 
-  public getListaPeliculas(): Observable<ListaPeliculas> {
-    return this.http.get<ListaPeliculas>(this.ChuckUrl);
+  public getListaPeliculas(params:{}): Observable<ListaPeliculas> {
+    return this.http.get<ListaPeliculas>(this.DiscoverUrl,{params});
   }
 
-  public getSearchPeliculas(nombrePelicula:String, yearPelicula:String): Observable<ListaPeliculas> {
-    return this.http.get<ListaPeliculas>(this.searchUrl,{params:{'query':`${nombrePelicula}`, 'year':`${yearPelicula}`}});
+  public getSearchPeliculas(params:{}): Observable<ListaPeliculas> {
+    return this.http.get<ListaPeliculas>(this.searchUrl,{params});
+  }
+
+  public getGenerosPeliculas(): Observable<ListaGeneros> {
+    return this.http.get<ListaGeneros>(this.generosUrl);
   }
 }
